@@ -27,7 +27,14 @@ align-items: center;
 font-size: 1rem;
 margin: 0 0 10rem 0;
 }
-
+.user {
+  border-bottom: 1px solid rgb(236, 226, 213);
+  padding: 1rem;
+}
+.followers {
+  border-bottom: 1px solid rgb(236, 226, 213);
+  padding: 1rem;
+}
 
 
 button {
