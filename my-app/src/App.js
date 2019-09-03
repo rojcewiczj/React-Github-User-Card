@@ -2,6 +2,7 @@ import React from 'react';
 import axios from "axios";
 import UserCard from './components/UserCard';
 import FollowerCard from './components/FollowerCard';
+import 'semantic-ui-css/semantic.min.css';
 import './App.css';
 
 
@@ -36,21 +37,20 @@ class App extends React.Component {
     console.log('Rendering component');
     return (
       <div className="App">
-      <div className="header"> <h1>User and Followers</h1></div>
-
-       <div className="user-card">
-          <UserCard name={this.state.User.name} img={this.state.User.avatar_url} location={this.state.User.location} key={this.state.User.id} />
+        <div className="user">User</div>
+        <br></br>
+      <div className="header">   
+      <UserCard name={this.state.User.name} img={this.state.User.avatar_url} location={this.state.User.location} key={this.state.User.id} />
+    
       </div>
-
-     <div className="follower-cards">
-
+      <div className="follower-cards">
+          <div className="followers"><h2> Followers </h2></div>
         {this.state.Followers.map(follower => {
           return (
-             <FollowerCard name={follower.name} img={follower.avatar_url} location={follower.location} key={follower.id} />   
+             <FollowerCard name={follower.login} img={follower.avatar_url} location={follower.location} key={follower.id} />   
              )
           })}
-   
-
+  
      </div>
        
       </div>
