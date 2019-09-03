@@ -35,7 +35,15 @@ margin: 0 0 10rem 0;
   border-bottom: 1px solid rgb(236, 226, 213);
   padding: 1rem;
 }
+.follower-cards {
+  margin: 2rem;
+  align-items: top;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
 
+}
 
 button {
   background-color: #33383f;

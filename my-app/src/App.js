@@ -42,9 +42,10 @@ class App extends React.Component {
       <div className="header">   
       <UserCard name={this.state.User.name} img={this.state.User.avatar_url} location={this.state.User.location} key={this.state.User.id} />
     
-      </div>
+      </div> 
+      <div className="followers"><h2> Followers </h2></div>
       <div className="follower-cards">
-          <div className="followers"><h2> Followers </h2></div>
+         
         {this.state.Followers.map(follower => {
           return (
              <FollowerCard name={follower.login} img={follower.avatar_url} location={follower.location} key={follower.id} />   
