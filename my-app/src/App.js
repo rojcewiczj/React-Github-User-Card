@@ -1,51 +1,40 @@
 import React from 'react';
-import UserData from './components/UserData';
-import FollowerData from './components/FollowersData'
+import axios from "axios";
+import UserCard from './components/UserCard';
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        
-      </header>
-    </div>
-  );
-}
 
-export default App;
+
+
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       User: [],
-      Followers: [],
+      Follower: [],
     };
     console.log('Constructor is running!');
   }
 
-  componentDidMount() {
+  UserComponentDidMount() {
     console.log('CDM is running');
-    this.setState({
-      User: UserData,
-      Followers: FollowersData,
-    });
-  }
-
-  componentDidUpdate() {
-    console.log('CDU is running');
-  }
-
-  componentWillUnmount() {}
-
-  ourOwnClassPropertiesHere() {}
+    axios
+    .get("https://api.github.com/rojcewiczj/")
+    .then(res => this.setState({ User: res.data }))
+    .catch(err => console.log("why me!?"));
+    console.log(this.state.User)
+  };
+ 
+  
 
   render() {
     console.log('Rendering component');
     return (
       <div className="App">
-        <User user={this.state.User} />
-        <Followers followers={this.state.Followers} />
+   <UserCard name={this.state.User.name} img={this.state.User.img} location={this.state.User.location} key={this.state.User.id} />
+        
+       
       </div>
     );
   }
