@@ -15,7 +15,7 @@ class App extends React.Component {
     this.state = {
       User: [],
       Followers: [],
-     UserName:'rojcewiczj'
+      value:''
     };
     console.log('Constructor is running!');
   }
@@ -23,12 +23,12 @@ class App extends React.Component {
   componentDidMount() {
     console.log('CDM is running');
     axios
-    .get(`https://api.github.com/users/${this.state.UserName}`)
+    .get(`https://api.github.com/users/rojcewiczj`)
     .then(res => this.setState({ User: res.data }))
     .catch(err => console.log("why me!?"));
     console.log(this.state.User)
  axios
-    .get(`https://api.github.com/users/${this.state.UserName}/followers`)
+    .get(`https://api.github.com/users/rojcewiczj/followers`)
     .then(res => this.setState({ Followers: res.data }))
     .catch(err => console.log("why me!?"));
     console.log(this.state.User)
@@ -36,14 +36,14 @@ class App extends React.Component {
   
 fetchUserName = e => {
     e.preventDefault();
-    fetch(`https://api.github.com/users/${this.state.UserName}/followers`)
+    fetch(`https://api.github.com/users/${this.state.value}/followers`)
       .then(res => this.setState({ Followers: res.data }))
       .catch(err => console.log("why"));
   };
 
-  handleChange = e => {
+  handleChange = event => {
     this.setState({
-      [e.target.name]: e.target.value
+      value: event.target.value
     });
   };
 
@@ -58,12 +58,11 @@ fetchUserName = e => {
         
         <input
           type="text"
-          value={this.state.UserName}
+          value={this.state.value}
           onChange={this.handleChange}
-          name="UserName"
         />
-         <button onClick={this.fetchUserName}>Find Followers</button>
-    
+         <button   onClick={this.fetchUserName}>Find Followers</button>
+       
         </div>
         <br></br>
       <div className="header">   
