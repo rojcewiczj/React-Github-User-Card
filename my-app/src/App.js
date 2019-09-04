@@ -15,7 +15,7 @@ class App extends React.Component {
     this.state = {
       User: [],
       Followers: [],
-     UserName: ""
+     UserName:'rojcewiczj'
     };
     console.log('Constructor is running!');
   }
@@ -55,6 +55,7 @@ fetchUserName = e => {
     return (
       <div className="App">
         <div className="user">
+        
         <input
           type="text"
           value={this.state.UserName}
@@ -62,6 +63,7 @@ fetchUserName = e => {
           name="UserName"
         />
          <button onClick={this.fetchUserName}>Find Followers</button>
+    
         </div>
         <br></br>
       <div className="header">   
