@@ -2,7 +2,7 @@ import React from 'react';
 import axios from "axios";
 import UserCard from './components/UserCard';
 import FollowerCard from './components/FollowerCard';
-import SearchUserForm from './components/SearchForm';
+
 import 'semantic-ui-css/semantic.min.css';
 import './App.css';
 
@@ -15,38 +15,54 @@ class App extends React.Component {
     this.state = {
       User: [],
       Followers: [],
-  
+     UserName: ""
     };
     console.log('Constructor is running!');
   }
-
+ 
   componentDidMount() {
     console.log('CDM is running');
     axios
-    .get(`https://api.github.com/users/rojcewiczj`)
+    .get(`https://api.github.com/users/${this.state.UserName}`)
     .then(res => this.setState({ User: res.data }))
     .catch(err => console.log("why me!?"));
     console.log(this.state.User)
  axios
-    .get(`https://api.github.com/users/rojcewiczj/followers`)
+    .get(`https://api.github.com/users/${this.state.UserName}/followers`)
     .then(res => this.setState({ Followers: res.data }))
     .catch(err => console.log("why me!?"));
     console.log(this.state.User)
   };
   
-  searchUser = UserName => {
-    const newUser = {
-      name: UserName,
-    };
+fetchUserName = e => {
+    e.preventDefault();
+    fetch(`https://api.github.com/users/${this.state.UserName}/followers`)
+      .then(res => this.setState({ Followers: res.data }))
+      .catch(err => console.log("why"));
+  };
+
+  handleChange = e => {
     this.setState({
-      userName: [newUser]
+      [e.target.name]: e.target.value
     });
   };
+
+ 
+ 
+ 
   render() {
     console.log('Rendering component');
     return (
       <div className="App">
-        <div className="user"><SearchUserForm searchUser = {this.searchUser} /></div>
+        <div className="user">
+        <input
+          type="text"
+          value={this.state.UserName}
+          onChange={this.handleChange}
+          name="UserName"
+        />
+         <button onClick={this.fetchUserName}>Find Followers</button>
+        </div>
         <br></br>
       <div className="header">   
       <UserCard name={this.state.User.name} img={this.state.User.avatar_url} location={this.state.User.location} key={this.state.User.id} />
